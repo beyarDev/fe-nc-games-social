@@ -4,13 +4,14 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
-    max-width: 500px;
+    width: 90%;
+    max-width: 900px;
     margin: 20px auto;
     border: 1px solid rgb(181, 178, 173);
     padding: 10px;
     border-radius: 5px;
 }
-.review-img-owner-container {
+.review-img-owner-date-container {
     margin-bottom: 20px;
 }
 
@@ -30,5 +31,22 @@
     margin-bottom: 20px;
     font-size: 1.1rem;
     font-weight: 400;
-    color: #BBBBBB;
+    color: #bd5656;
+}
+.review-date{
+    margin-left: 30px;
+    font-size: 0.8rem;
+}
+.review-votes-container{
+    width: fit-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+}
+.review-votes{
+    font-size: 1.2rem;
+}
+.review-designer{
+    margin-top: 10px;
 }
