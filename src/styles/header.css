@@ -1,0 +1,16 @@
+
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    max-width: 500px;
+    margin: 0 auto;
+    margin-left: 20px;
+  }
+  
+.profile--img{
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+}
