@@ -1,4 +1,4 @@
-//css
+//style
 import "./App.css";
 // App components
 import Header from "./components/header";
