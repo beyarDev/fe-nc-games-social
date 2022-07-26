@@ -1,7 +1,7 @@
 import { useState,useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import IncVotesBtn from "./incvotesbtn";
+
 import { sliceDate } from "../utils/sliceDate";
 
 export default function Category(){
@@ -25,7 +25,7 @@ export default function Category(){
                             <span className="review-designer"><span className="low-contrast">Designer :</span> {review.designer}</span>
                             <p className="review-body">{review.review_body}</p>
                             <div className="review-votes-container">
-                                <IncVotesBtn reviewID={review.review_id}/>
+                               
                                 <span className="review-votes">{review.votes}</span>
                             </div>
                             <span className="review-comment-count">{review.comment_count} comments</span>

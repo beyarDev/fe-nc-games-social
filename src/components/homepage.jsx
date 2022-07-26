@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react"
 import { sliceDate } from "../utils/sliceDate";
 //components
-import IncVotesBtn from "./incvotesbtn";
+
 //style
 import '../styles/homepage.css'
 export default function HomePage(){
@@ -28,7 +28,6 @@ export default function HomePage(){
                             <span className="review-designer"><span className="low-contrast">Designer :</span> {review.designer}</span>
                             <p className="review-body">{review.review_body}</p>
                             <div className="review-votes-container">
-                                <IncVotesBtn reviewID={review.review_id}/>
                                 <span className="review-votes">{review.votes}</span>
                             </div>
                             <span className="review-comment-count">{review.comment_count} comments</span>
