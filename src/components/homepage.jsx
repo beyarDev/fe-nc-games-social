@@ -15,8 +15,8 @@ export default function HomePage(){
     
     return <main>
              <section>
-                {reviewList.map(review =>{
-                    return <ReviewCard review={review} key={review.review_id}/>
+                {reviewList.map((review) =>{
+                    return <ReviewCard review={review} key={review.review_id} setReviewList={setReviewList} />
                 })}
              </section>
            </main>

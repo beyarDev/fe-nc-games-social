@@ -2,6 +2,8 @@ import { sliceDate } from "../utils/sliceDate";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import IncVotesBtn from "./incvotesbtn";
+import DecVotesBtn from "./decvotesbtn";
 
 export default function SingleReview(){
     const {reviewId} = useParams()
@@ -31,6 +33,8 @@ return <div className='review-card'>
     <span className="review-designer"><span className="low-contrast">Designer :</span> {singleReview.designer}</span>
     <p className="review-body">{singleReview.review_body}</p>
     <div className="review-votes-container">
+        <IncVotesBtn reviewID={singleReview.review_id} setSingleReview={setSingleReview}/>
+        <DecVotesBtn reviewID={singleReview.review_id} setSingleReview={setSingleReview}/>
         <span className="review-votes">{singleReview.votes}</span>
     </div>
     <span className="review-comment-count">{singleReview.comment_count} comments</span>
