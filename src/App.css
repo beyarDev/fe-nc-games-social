@@ -1,4 +1,13 @@
 .App {
-  text-align: center;
+
 }
 
+.flex-center{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.low-contrast{
+    color: rgb(148, 147, 147);
+}
