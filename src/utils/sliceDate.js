@@ -1,3 +1,4 @@
+
 export function sliceDate(date) {
-  return date.slice(0, 10);
+  return date ? date.slice(0, 10) : date;
 }
