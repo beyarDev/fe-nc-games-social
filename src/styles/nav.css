@@ -1,5 +1,28 @@
 .main-nav{
+    display: grid;
+    grid-template-areas: "a button"
+                         "ul ul";
     width: fit-content;
     margin: 0 auto;
     
+}
+.categories-ul{
+    text-decoration: none;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    max-width: 900px;
+    flex-wrap: wrap;
+}
+
+.category-dropDown-btn{
+    border: none;
+    background-color: #fff;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 1rem;
+    color: rgb(67, 45, 56);
+    margin-right: 20px
 }

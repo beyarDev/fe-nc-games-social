@@ -1,22 +1,19 @@
+import { useState,useEffect } from "react";
 import axios from "axios";
-import { useState, useEffect } from "react"
+import { useParams } from "react-router-dom";
+
 import { sliceDate } from "../utils/sliceDate";
-//components
 
-//style
-import '../styles/homepage.css'
-export default function HomePage(){
-    const [reviewList, setReviewList] = useState([]);
-
+export default function Category(){
+    const {slug} = useParams()
+    const [reviewByCategory, setReviewByCategory] = useState([])
     useEffect(()=>{
-        axios.get(`https://nc-games-social.herokuapp.com/api/reviews`).then(response =>{
-            setReviewList(response.data.reviews)
+        axios.get(`https://nc-games-social.herokuapp.com/api/reviews?category=${slug}`).then(response =>{
+            setReviewByCategory(response.data.reviews)
         })
-    })
-    
+    },[slug])
     return <main>
-             <section>
-                {reviewList.map(review =>{
+            {reviewByCategory.map(review =>{
                     return <div key={review.review_id} className='review-card'>
                             <div className="flex-center review-owner-date-container">
                             <span className="review-owner">{review.owner}</span>
@@ -28,11 +25,11 @@ export default function HomePage(){
                             <span className="review-designer"><span className="low-contrast">Designer :</span> {review.designer}</span>
                             <p className="review-body">{review.review_body}</p>
                             <div className="review-votes-container">
+                               
                                 <span className="review-votes">{review.votes}</span>
                             </div>
                             <span className="review-comment-count">{review.comment_count} comments</span>
                            </div>
                 })}
-             </section>
            </main>
 }
