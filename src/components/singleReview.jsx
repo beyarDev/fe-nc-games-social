@@ -2,22 +2,22 @@ import { sliceDate } from "../utils/sliceDate";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import IncVotesBtn from "./incvotesbtn";
-import DecVotesBtn from "./decvotesbtn";
 import Loading from "./loading";
+import VotesBtn from "./votesbtn";
+
 export default function SingleReview() {
   const { reviewId } = useParams();
   const [singleReview, setSingleReview] = useState({});
   const [user, setUsers] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [disableInc, setDisableInc] = useState(false);
-  const [disableDec, setDisableDec] = useState(false);
+  const [votes, setVotes] = useState(0);
   useEffect(() => {
     axios
       .get(`https://nc-games-social.herokuapp.com/api/reviews/${reviewId}`)
       .then((response) => {
         const review = response.data.review;
         setSingleReview(review);
+        setVotes(review.votes);
         setIsLoading(false);
         return review;
       })
@@ -61,21 +61,8 @@ export default function SingleReview() {
       </span>
       <p className="review-body">{singleReview.review_body}</p>
       <div className="review-votes-container">
-        <IncVotesBtn
-          reviewID={singleReview.review_id}
-          setSingleReview={setSingleReview}
-          setDisableInc={setDisableInc}
-          disableInc={disableInc}
-          setDisableDec={setDisableDec}
-        />
-        <DecVotesBtn
-          reviewID={singleReview.review_id}
-          setSingleReview={setSingleReview}
-          setDisableDec={setDisableDec}
-          disableDec={disableDec}
-          setDisableInc={setDisableInc}
-        />
-        <span className="review-votes">{singleReview.votes}</span>
+        <VotesBtn setVotes={setVotes} reviewID={singleReview.review_id} />
+        <span className="review-votes">{votes}</span>
       </div>
       <span className="review-comment-count">
         {singleReview.comment_count} comments

@@ -1,15 +1,9 @@
 import { Link } from "react-router-dom";
 import { sliceDate } from "../utils/sliceDate";
-import IncVotesBtn from "./incvotesbtn";
-import DecVotesBtn from "./decvotesbtn";
+import VotesBtn from "./votesbtn";
 import { useState } from "react";
-export default function ReviewCard({
-  review,
-  setReviewList,
-  setReviewByCategory,
-}) {
-  const [disableInc, setDisableInc] = useState(false);
-  const [disableDec, setDisableDec] = useState(false);
+export default function ReviewCard({ review }) {
+  const [votes, setVotes] = useState(review.votes);
   return (
     <div className="review-card">
       <div className="flex-center review-owner-date-container">
@@ -35,23 +29,8 @@ export default function ReviewCard({
       </span>
       <p className="review-body">{review.review_body}</p>
       <div className="review-votes-container">
-        <IncVotesBtn
-          reviewID={review.review_id}
-          setReviewList={setReviewList}
-          setDisableInc={setDisableInc}
-          disableInc={disableInc}
-          setDisableDec={setDisableDec}
-          setReviewByCategory={setReviewByCategory}
-        />
-        <DecVotesBtn
-          reviewID={review.review_id}
-          setReviewList={setReviewList}
-          setDisableDec={setDisableDec}
-          disableDec={disableDec}
-          setDisableInc={setDisableInc}
-          setReviewByCategory={setReviewByCategory}
-        />
-        <span className="review-votes">{review.votes}</span>
+        <VotesBtn reviewID={review.review_id} setVotes={setVotes} />
+        <span className="review-votes">{votes}</span>
       </div>
       <span className="review-comment-count">
         {review.comment_count} comments

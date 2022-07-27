@@ -1,14 +1,13 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import * as api from "../utils/api";
+
 export default function Categories() {
   const [categories, setCategories] = useState([]);
   useEffect(() => {
-    axios
-      .get("https://nc-games-social.herokuapp.com/api/categories")
-      .then((response) => {
-        setCategories(response.data.categories);
-      });
+    api.getData("categories").then((response) => {
+      setCategories(response.data.categories);
+    });
   });
   return (
     <ul className="categories-ul">

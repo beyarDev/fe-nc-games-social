@@ -1,22 +1,23 @@
 import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../contexts/userContext";
 import "../styles/header.css";
-import axios from "axios";
+import * as api from "../utils/api";
+
 export default function Header() {
   const [userImageUrl, setUserImageUrl] = useState("");
   const { username } = useContext(UserContext);
 
   useEffect(() => {
-    axios
-      .get(`https://nc-games-social.herokuapp.com/api/users/${username}`)
-      .then((response) => {
-        setUserImageUrl(response.data.user.avatar_url);
-      });
+    api.getData(`users/${username}`).then((response) => {
+      setUserImageUrl(response.data.user.avatar_url);
+    });
   }, [username]);
 
   return (
     <header className="header">
-      <h1>Welcome {username}</h1>
+      <h1>
+        Welcome <span className="user-name">{username}</span>
+      </h1>
       <img src={userImageUrl} alt={username} className="profile--img"></img>
     </header>
   );

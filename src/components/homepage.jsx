@@ -1,5 +1,5 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
+import * as api from "../utils/api";
 //components
 import ReviewCard from "./reviewCard";
 import Loading from "./loading";
@@ -9,12 +9,10 @@ export default function HomePage() {
   const [reviewList, setReviewList] = useState([]);
   const [isloading, setIsLoading] = useState(true);
   useEffect(() => {
-    axios
-      .get(`https://nc-games-social.herokuapp.com/api/reviews`)
-      .then((response) => {
-        setReviewList(response.data.reviews);
-        setIsLoading(false);
-      });
+    api.getData("reviews").then((response) => {
+      setReviewList(response.data.reviews);
+      setIsLoading(false);
+    });
   }, []);
 
   return isloading ? (
