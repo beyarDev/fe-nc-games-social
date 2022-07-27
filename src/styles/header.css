@@ -9,8 +9,15 @@
     margin-top: 20px;
   }
   
+.header h1{
+  color: rgb(99, 99, 99);
+}
+
 .profile--img{
     width: 75px;
     height: 75px;
     border-radius: 50%;
+}
+.user-name{
+  color: rgb(18, 45, 124);
 }

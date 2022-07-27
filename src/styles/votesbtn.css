@@ -1,0 +1,18 @@
+.votes-btn{
+    width: 40px;
+    height: 100%;
+    border: none;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.votes-icon{
+    height: 100%;
+    width: 100%;
+}
+
+.active-votes-btn {
+    background-color:#bd5656;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px #bd5656;
+}
