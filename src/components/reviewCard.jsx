@@ -2,7 +2,10 @@ import { Link } from "react-router-dom"
 import { sliceDate } from "../utils/sliceDate"
 import IncVotesBtn from "./incvotesbtn"
 import DecVotesBtn from "./decvotesbtn"
-export default function ReviewCard({review, setReviewList}){
+import { useState } from "react"
+export default function ReviewCard({review, setReviewList, setReviewByCategory}){
+    const [disableInc, setDisableInc] = useState(false)
+    const [disableDec, setDisableDec] = useState(false)
     return <div className='review-card'>
                 <div className="flex-center review-owner-date-container">
                     <span className="review-owner">{review.owner}</span>
@@ -14,8 +17,8 @@ export default function ReviewCard({review, setReviewList}){
                 <span className="review-designer"><span className="low-contrast">Designer :</span> {review.designer}</span>
                 <p className="review-body">{review.review_body}</p>
                 <div className="review-votes-container">
-                    <IncVotesBtn reviewID={review.review_id} setReviewList={setReviewList}/>
-                    <DecVotesBtn reviewID={review.review_id} setReviewList={setReviewList}/>
+                    <IncVotesBtn reviewID={review.review_id} setReviewList={setReviewList} setDisableInc={setDisableInc} disableInc={disableInc} setDisableDec={setDisableDec} setReviewByCategory={setReviewByCategory}/>
+                    <DecVotesBtn reviewID={review.review_id} setReviewList={setReviewList} setDisableDec={setDisableDec} disableDec={disableDec} setDisableInc={setDisableInc} setReviewByCategory={setReviewByCategory}/>
                     <span className="review-votes">{review.votes}</span>
                 </div>
                 <span className="review-comment-count">{review.comment_count} comments</span>

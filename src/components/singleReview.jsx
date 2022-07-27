@@ -10,6 +10,8 @@ export default function SingleReview(){
     const [singleReview,setSingleReview] = useState({})
     const [user, setUsers] = useState({})
     const [isLoading, setIsLoading] = useState(true)
+    const [disableInc, setDisableInc] = useState(false)
+    const [disableDec, setDisableDec] = useState(false)
     useEffect(()=>{
         axios.get(`https://nc-games-social.herokuapp.com/api/reviews/${reviewId}`).then(response=>{
             const review = response.data.review
@@ -35,8 +37,8 @@ return isLoading? <Loading/> : <div className='review-card'>
     <span className="review-designer"><span className="low-contrast">Designer :</span> {singleReview.designer}</span>
     <p className="review-body">{singleReview.review_body}</p>
     <div className="review-votes-container">
-        <IncVotesBtn reviewID={singleReview.review_id} setSingleReview={setSingleReview}/>
-        <DecVotesBtn reviewID={singleReview.review_id} setSingleReview={setSingleReview}/>
+        <IncVotesBtn reviewID={singleReview.review_id} setSingleReview={setSingleReview} setDisableInc={setDisableInc} disableInc={disableInc} setDisableDec={setDisableDec}/>
+        <DecVotesBtn reviewID={singleReview.review_id} setSingleReview={setSingleReview} setDisableDec={setDisableDec} disableDec={disableDec} setDisableInc={setDisableInc}/>
         <span className="review-votes">{singleReview.votes}</span>
     </div>
     <span className="review-comment-count">{singleReview.comment_count} comments</span>

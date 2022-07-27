@@ -13,7 +13,7 @@ export default function HomePage(){
             setReviewList(response.data.reviews)
             setIsLoading(false)
         })
-    })
+    },[])
     
     return isloading? <Loading/> : <main>
              <section>

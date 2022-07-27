@@ -16,7 +16,7 @@ export default function Category(){
     },[slug])
     return isLoading? <Loading/> : <main>
             {reviewByCategory.map(review =>{
-                    return <ReviewCard review={review} key={review.review_id}/>
+                    return <ReviewCard review={review} key={review.review_id} setReviewByCategory={setReviewByCategory} />
                 })}
            </main>
 }
