@@ -4,15 +4,17 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import IncVotesBtn from "./incvotesbtn";
 import DecVotesBtn from "./decvotesbtn";
-
+import Loading from './loading'
 export default function SingleReview(){
     const {reviewId} = useParams()
     const [singleReview,setSingleReview] = useState({})
     const [user, setUsers] = useState({})
+    const [isLoading, setIsLoading] = useState(true)
     useEffect(()=>{
         axios.get(`https://nc-games-social.herokuapp.com/api/reviews/${reviewId}`).then(response=>{
             const review = response.data.review
             setSingleReview(review)
+            setIsLoading(false)
             return review
               }).then((review)=>{
                 axios.get(`https://nc-games-social.herokuapp.com/api/users/${review.owner}`).then(response =>{
@@ -21,7 +23,7 @@ export default function SingleReview(){
               })
     },[reviewId])
     
-return <div className='review-card'>
+return isLoading? <Loading/> : <div className='review-card'>
     <div className="flex-center review-owner-date-container">
         <img src={user.avatar_url} alt={user.username} className='user-avatar'></img>
         <span className="review-owner">{singleReview.owner}</span>
