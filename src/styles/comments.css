@@ -43,3 +43,36 @@ flex-direction: column;
     margin-right: 10px;
 }
 
+.comment-textarea{
+    border-radius: 2px;
+    margin-top: 10px;
+    width: 100%;
+    padding: 8px;
+}
+
+.comment-form{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    margin-bottom: 20px;
+}
+.comment-form button {
+    text-decoration: none;
+    background-color:#1484D6;
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+.disabled-btn{
+    opacity: 0.2;
+}
+@media screen and (min-width:700px){
+    .comment-form{
+        min-width: 600px;
+    }
+}

@@ -13,7 +13,7 @@ export default function SingleReview() {
   const [user, setUsers] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [votes, setVotes] = useState(0);
-  
+
   useEffect(() => {
     axios
       .get(`https://nc-games-social.herokuapp.com/api/reviews/${reviewId}`)
@@ -68,7 +68,7 @@ export default function SingleReview() {
         <span className="review-votes">{votes}</span>
       </div>
       <ShowHideComments commentsCount={singleReview.comment_count}>
-        <CommentsCard reviewId={singleReview.review_id}/>
+        <CommentsCard reviewId={singleReview.review_id} />
       </ShowHideComments>
     </div>
   );
