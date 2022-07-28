@@ -1,3 +1,15 @@
+.filters-container {
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+}
+.filters-container label{
+    margin-right: 5px;
+    margin-left: 30px;
+}   
+
 .review-card{
     display: flex;
     flex-direction: column;
