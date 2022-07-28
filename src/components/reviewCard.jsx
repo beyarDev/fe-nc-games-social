@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
-import { sliceDate } from "../utils/sliceDate";
-import VotesBtn from "./votesbtn";
 import { useState } from "react";
+import { sliceDate } from "../utils/sliceDate";
+
+import VotesBtn from "./votesbtn";
+import CommentsCard from "./commentsCard";
+import ShowHideComments from "./showhidecomments";
+
 export default function ReviewCard({ review }) {
   const [votes, setVotes] = useState(review.votes);
   return (
@@ -32,9 +36,9 @@ export default function ReviewCard({ review }) {
         <VotesBtn reviewID={review.review_id} setVotes={setVotes} />
         <span className="review-votes">{votes}</span>
       </div>
-      <span className="review-comment-count">
-        {review.comment_count} comments
-      </span>
+      <ShowHideComments commentsCount={review.comment_count}>
+        <CommentsCard reviewId={review.review_id} />
+      </ShowHideComments>
     </div>
   );
 }
