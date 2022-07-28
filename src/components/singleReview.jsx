@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Loading from "./loading";
 import VotesBtn from "./votesbtn";
+import ShowHideComments from "./showhidecomments";
+import CommentsCard from "./commentsCard";
 
 export default function SingleReview() {
   const { reviewId } = useParams();
@@ -11,6 +13,7 @@ export default function SingleReview() {
   const [user, setUsers] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [votes, setVotes] = useState(0);
+  
   useEffect(() => {
     axios
       .get(`https://nc-games-social.herokuapp.com/api/reviews/${reviewId}`)
@@ -64,9 +67,9 @@ export default function SingleReview() {
         <VotesBtn setVotes={setVotes} reviewID={singleReview.review_id} />
         <span className="review-votes">{votes}</span>
       </div>
-      <span className="review-comment-count">
-        {singleReview.comment_count} comments
-      </span>
+      <ShowHideComments commentsCount={singleReview.comment_count}>
+        <CommentsCard reviewId={singleReview.review_id}/>
+      </ShowHideComments>
     </div>
   );
 }
