@@ -14,6 +14,6 @@ export function addNewComment(prevComments, author, body) {
   newComment.body = body;
   newComment.comment_id = body;
   newComment.votes = 0;
-  newComments.unshift(newComment);
+  newComments.push(newComment);
   return newComments;
 }

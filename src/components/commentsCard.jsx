@@ -10,6 +10,7 @@ export default function CommentsCard({ reviewId }) {
   const [commentText, setCommentText] = useState("");
   const [disable, setDisable] = useState(false);
   const [error, setEror] = useState(null);
+  const [success, setSuccess] = useState(false);
   useEffect(() => {
     api
       .getData(`reviews/${reviewId}/comments`)
@@ -32,7 +33,9 @@ export default function CommentsCard({ reviewId }) {
         body: commentText,
       })
       .then((response) => {
+        setCommentText("");
         setDisable(false);
+        setSuccess(true);
       })
       .catch((err) => {
         setEror(err);
@@ -41,14 +44,19 @@ export default function CommentsCard({ reviewId }) {
 
   return (
     <div className="comments-container">
+      {success ? (
+        <strong>your comment has been added successfuly</strong>
+      ) : null}
       {error ? (
         <p>could not post the comment</p>
       ) : (
         <form onSubmit={handelSubmit} className="comment-form">
           <textarea
             type="textarea"
+            value={commentText}
             onChange={(e) => {
               setCommentText(e.target.value);
+              setSuccess(false);
             }}
             className="comment-textarea"
             placeholder="write a comment"
@@ -61,7 +69,6 @@ export default function CommentsCard({ reviewId }) {
           </button>
         </form>
       )}
-
       {comments.map((comment) => {
         return (
           <div key={comment.comment_id} className="comment-card">
