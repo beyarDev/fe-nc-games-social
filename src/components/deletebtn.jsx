@@ -29,7 +29,11 @@ export default function DeleteBtn({ commentId, setComments, setCommentCount }) {
     return <strong>Sorry could not delete the comment</strong>;
   }
   return (
-    <button onClick={handelDelete} disabled={disable}>
+    <button
+      onClick={handelDelete}
+      disabled={disable}
+      className="delete-comment-btn"
+    >
       Delete
     </button>
   );
