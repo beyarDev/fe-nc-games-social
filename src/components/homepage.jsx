@@ -18,6 +18,7 @@ export default function HomePage() {
     limit: 100,
   };
   useEffect(() => {
+    setIsLoading(true);
     api.getData("reviews", queryObject).then((response) => {
       setReviewList(response.data.reviews);
       setIsLoading(false);
