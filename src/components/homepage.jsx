@@ -9,7 +9,7 @@ import FilterReviews from "./filterReviews";
 import "../styles/homepage.css";
 
 export default function HomePage() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const [reviewList, setReviewList] = useState([]);
   const [isloading, setIsLoading] = useState(true);
   const queryObject = {
