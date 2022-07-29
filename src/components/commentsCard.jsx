@@ -2,8 +2,10 @@ import { useEffect, useState, useContext } from "react";
 import * as api from "../utils/api";
 import { userAvatarUrl, addNewComment } from "../utils/createRef";
 import { UserContext } from "../contexts/userContext";
+import DeleteBtn from "./deletebtn";
+import { changeId } from "../utils/sliceDate";
 
-export default function CommentsCard({ reviewId }) {
+export default function CommentsCard({ reviewId, setCommentCount }) {
   const [comments, setComments] = useState([]);
   const [users, setUsers] = useState([]);
   const { username } = useContext(UserContext);
@@ -24,6 +26,9 @@ export default function CommentsCard({ reviewId }) {
   function handelSubmit(e) {
     e.preventDefault();
     setDisable(true);
+    setCommentCount((prevCount) => {
+      return prevCount + 1;
+    });
     setComments((prevComments) => {
       return addNewComment(prevComments, username, commentText);
     });
@@ -33,6 +38,9 @@ export default function CommentsCard({ reviewId }) {
         body: commentText,
       })
       .then((response) => {
+        setComments((prevComments) => {
+          return changeId(prevComments, response.data.comment);
+        });
         setCommentText("");
         setDisable(false);
         setSuccess(true);
@@ -84,6 +92,13 @@ export default function CommentsCard({ reviewId }) {
             <span className="comment-votes">
               <span className="comment-votes-count">{comment.votes}</span> Votes
             </span>
+            {comment.author === username ? (
+              <DeleteBtn
+                commentId={comment.comment_id}
+                setComments={setComments}
+                setCommentCount={setCommentCount}
+              />
+            ) : null}
           </div>
         );
       })}

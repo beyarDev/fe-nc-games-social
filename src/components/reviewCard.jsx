@@ -8,6 +8,7 @@ import ShowHideComments from "./showhidecomments";
 
 export default function ReviewCard({ review }) {
   const [votes, setVotes] = useState(review.votes);
+  const [commentCount, setCommentCount] = useState(review.comment_count);
   return (
     <div className="review-card">
       <div className="flex-center review-owner-date-container">
@@ -36,8 +37,11 @@ export default function ReviewCard({ review }) {
         <VotesBtn reviewID={review.review_id} setVotes={setVotes} />
         <span className="review-votes">{votes}</span>
       </div>
-      <ShowHideComments commentsCount={review.comment_count}>
-        <CommentsCard reviewId={review.review_id} />
+      <ShowHideComments commentsCount={commentCount}>
+        <CommentsCard
+          reviewId={review.review_id}
+          setCommentCount={setCommentCount}
+        />
       </ShowHideComments>
     </div>
   );
