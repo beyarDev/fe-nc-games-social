@@ -9,6 +9,7 @@ export default function HomePage() {
   const [reviewList, setReviewList] = useState([]);
   const [isloading, setIsLoading] = useState(true);
   useEffect(() => {
+    setIsLoading(true);
     api.getData("reviews").then((response) => {
       setReviewList(response.data.reviews);
       setIsLoading(false);

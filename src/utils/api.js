@@ -13,3 +13,7 @@ export function patchData(url, bodyObject) {
 export function postData(url, bodyObject) {
   return axios.post(`${AppURL}${url}`, bodyObject);
 }
+
+export function deleteComment(commentId) {
+  return axios.delete(`${AppURL}comments/${commentId}`);
+}

@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import * as api from "../utils/api";
 import { userAvatarUrl, addNewComment } from "../utils/createRef";
 import { UserContext } from "../contexts/userContext";
+import DeleteBtn from "./deletebtn";
 
 export default function CommentsCard({ reviewId }) {
   const [comments, setComments] = useState([]);
@@ -84,6 +85,7 @@ export default function CommentsCard({ reviewId }) {
             <span className="comment-votes">
               <span className="comment-votes-count">{comment.votes}</span> Votes
             </span>
+            <DeleteBtn />
           </div>
         );
       })}
