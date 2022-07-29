@@ -1,22 +1,36 @@
 import { useState } from "react";
 import * as api from "../utils/api";
 
-export default function DeleteBtn({ commentId, setComments }) {
+export default function DeleteBtn({ commentId, setComments, setCommentCount }) {
   const [error, setError] = useState(null);
+  const [disable, setDisable] = useState(false);
   function handelDelete(e) {
-    setComments((prevComment) => {
-      setError(null);
-      const updatedComments = prevComment.filter((comment) => {
-        return comment.comment_id !== commentId;
+    setError(null);
+    setDisable(true);
+    api
+      .deleteComment(commentId)
+      .then(() => {
+        setComments((prevComment) => {
+          const updatedComments = prevComment.filter((comment) => {
+            return comment.comment_id !== commentId;
+          });
+          return updatedComments;
+        });
+        setCommentCount((prevCount) => {
+          return prevCount - 1;
+        });
+        setDisable(false);
+      })
+      .catch((err) => {
+        setError(err);
       });
-      return updatedComments;
-    });
-    api.deleteComment(commentId).catch((err) => {
-      setError(err);
-    });
   }
   if (error) {
     return <strong>Sorry could not delete the comment</strong>;
   }
-  return <button onClick={handelDelete}>Delete</button>;
+  return (
+    <button onClick={handelDelete} disabled={disable}>
+      Delete
+    </button>
+  );
 }
