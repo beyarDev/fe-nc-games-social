@@ -4,6 +4,7 @@ import { userAvatarUrl, addNewComment } from "../utils/createRef";
 import { UserContext } from "../contexts/userContext";
 import DeleteBtn from "./deletebtn";
 import { changeId } from "../utils/sliceDate";
+import Loading from "./loading";
 
 export default function CommentsCard({ reviewId, setCommentCount }) {
   const [comments, setComments] = useState([]);
@@ -13,17 +14,28 @@ export default function CommentsCard({ reviewId, setCommentCount }) {
   const [disable, setDisable] = useState(false);
   const [error, setEror] = useState(null);
   const [success, setSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
+    setEror(null);
+    setIsLoading(true);
     api
       .getData(`reviews/${reviewId}/comments`)
       .then((response) => {
         setComments(response.data.comments);
         return api.getData("users");
       })
-      .then((response) => setUsers(response.data.users));
+      .then((response) => {
+        setUsers(response.data.users);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        setEror("Sorry could not load comments");
+      });
   }, [reviewId]);
 
   function handelSubmit(e) {
+    setEror(null);
     e.preventDefault();
     setDisable(true);
     setCommentCount((prevCount) => {
@@ -46,7 +58,7 @@ export default function CommentsCard({ reviewId, setCommentCount }) {
         setSuccess(true);
       })
       .catch((err) => {
-        setEror(err);
+        setEror("sorry could not post comment");
       });
   }
 
@@ -56,7 +68,7 @@ export default function CommentsCard({ reviewId, setCommentCount }) {
         <strong>your comment has been added successfuly</strong>
       ) : null}
       {error ? (
-        <p>could not post the comment</p>
+        <p className="error">{error}</p>
       ) : (
         <form onSubmit={handelSubmit} className="comment-form">
           <textarea
@@ -77,31 +89,36 @@ export default function CommentsCard({ reviewId, setCommentCount }) {
           </button>
         </form>
       )}
-      {comments.map((comment) => {
-        return (
-          <div key={comment.comment_id} className="comment-card">
-            <div className="avatar-author-container">
-              <img
-                src={userAvatarUrl(comment, users)}
-                alt="commenter"
-                className="comment-author-avatar"
-              />
-              <strong className="comment-author">{comment.author}</strong>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        comments.map((comment) => {
+          return (
+            <div key={comment.comment_id} className="comment-card">
+              <div className="avatar-author-container">
+                <img
+                  src={userAvatarUrl(comment, users)}
+                  alt="commenter"
+                  className="comment-author-avatar"
+                />
+                <strong className="comment-author">{comment.author}</strong>
+              </div>
+              <p className="comment-body">{comment.body}</p>
+              <span className="comment-votes">
+                <span className="comment-votes-count">{comment.votes}</span>{" "}
+                Votes
+              </span>
+              {comment.author === username ? (
+                <DeleteBtn
+                  commentId={comment.comment_id}
+                  setComments={setComments}
+                  setCommentCount={setCommentCount}
+                />
+              ) : null}
             </div>
-            <p className="comment-body">{comment.body}</p>
-            <span className="comment-votes">
-              <span className="comment-votes-count">{comment.votes}</span> Votes
-            </span>
-            {comment.author === username ? (
-              <DeleteBtn
-                commentId={comment.comment_id}
-                setComments={setComments}
-                setCommentCount={setCommentCount}
-              />
-            ) : null}
-          </div>
-        );
-      })}
+          );
+        })
+      )}
     </div>
   );
 }

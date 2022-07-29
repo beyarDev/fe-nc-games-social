@@ -6,18 +6,29 @@ import * as api from "../utils/api";
 export default function Header() {
   const [userImageUrl, setUserImageUrl] = useState("");
   const { username } = useContext(UserContext);
-
+  const [error, setError] = useState(null);
   useEffect(() => {
-    api.getData(`users/${username}`).then((response) => {
-      setUserImageUrl(response.data.user.avatar_url);
-    });
+    setError(null);
+    api
+      .getData(`users/${username}`)
+      .then((response) => {
+        setUserImageUrl(response.data.user.avatar_url);
+      })
+      .catch((err) => {
+        setError(err);
+      });
   }, [username]);
 
   return (
     <header className="header">
-      <h1>
-        Welcome <span className="user-name">{username}</span>
-      </h1>
+      {error ? (
+        <h3 className="error">could not load user</h3>
+      ) : (
+        <h1>
+          Welcome <span className="user-name">{username}</span>
+        </h1>
+      )}
+
       <img src={userImageUrl} alt={username} className="profile--img"></img>
     </header>
   );

@@ -6,6 +6,7 @@ import Navigation from "./components/nav";
 import HomePage from "./components/homepage";
 import Category from "./components/categoryPage";
 import SingleReview from "./components/singleReview";
+import NotFound from "./components/notfound";
 
 //React components
 import { Route, Routes, BrowserRouter } from "react-router-dom";
@@ -21,7 +22,11 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/categories/:slug" element={<Category />} />
-            <Route path="/reviews/:reviewTitle/:reviewId" element={<SingleReview />} />
+            <Route
+              path="/reviews/:reviewTitle/:reviewId"
+              element={<SingleReview />}
+            />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
       </BrowserRouter>

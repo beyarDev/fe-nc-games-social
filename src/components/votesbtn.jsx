@@ -7,7 +7,7 @@ import "../styles/votesbtn.css";
 export default function VotesBtn({ reviewID, setVotes }) {
   const [incrementActive, setIncrementActive] = useState(false);
   const [decrementActive, setDecrementActive] = useState(false);
-
+  const [error, setError] = useState(null);
   function incVotes() {
     if (incrementActive) {
       setVotes((prevVote) => {
@@ -19,6 +19,9 @@ export default function VotesBtn({ reviewID, setVotes }) {
         })
         .then(() => {
           setIncrementActive(false);
+        })
+        .catch((err) => {
+          setError(err);
         });
     } else {
       setVotes((prevVote) => {
@@ -30,6 +33,9 @@ export default function VotesBtn({ reviewID, setVotes }) {
         })
         .then(() => {
           setIncrementActive(true);
+        })
+        .catch((err) => {
+          setError(err);
         });
     }
   }
@@ -44,6 +50,9 @@ export default function VotesBtn({ reviewID, setVotes }) {
         })
         .then(() => {
           setDecrementActive(false);
+        })
+        .catch((err) => {
+          setError(err);
         });
     } else {
       setVotes((prevVote) => {
@@ -55,8 +64,14 @@ export default function VotesBtn({ reviewID, setVotes }) {
         })
         .then(() => {
           setDecrementActive(true);
+        })
+        .catch((err) => {
+          setError(err);
         });
     }
+  }
+  if (error) {
+    return <span className="error">error</span>;
   }
   return (
     <>
