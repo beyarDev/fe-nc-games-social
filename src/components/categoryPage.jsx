@@ -11,6 +11,8 @@ export default function Category() {
   const [searchParams] = useSearchParams();
   const [reviewByCategory, setReviewByCategory] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   const queryObject = {
     category: slug,
     sort_by: searchParams.get("sortby"),
@@ -18,20 +20,31 @@ export default function Category() {
     limit: 100,
   };
   useEffect(() => {
+    setError(null);
     setIsLoading(true);
-    api.getData("reviews", queryObject).then((response) => {
-      setReviewByCategory(response.data.reviews);
-      setIsLoading(false);
-    });
+    api
+      .getData("reviews", queryObject)
+      .then((response) => {
+        setReviewByCategory(response.data.reviews);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        setError(err);
+      });
   }, [slug, queryObject.order, queryObject.limit, queryObject.sort_by]);
   return isLoading ? (
     <Loading />
   ) : (
     <main>
       <FilterReviews />
-      {reviewByCategory.map((review) => {
-        return <ReviewCard review={review} key={review.review_id} />;
-      })}
+      {error ? (
+        <h3 className="error">invalid URL query</h3>
+      ) : (
+        reviewByCategory.map((review) => {
+          return <ReviewCard review={review} key={review.review_id} />;
+        })
+      )}
     </main>
   );
 }

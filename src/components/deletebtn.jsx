@@ -26,7 +26,7 @@ export default function DeleteBtn({ commentId, setComments, setCommentCount }) {
       });
   }
   if (error) {
-    return <strong>Sorry could not delete the comment</strong>;
+    return <strong className="error">Sorry could not delete the comment</strong>;
   }
   return (
     <button

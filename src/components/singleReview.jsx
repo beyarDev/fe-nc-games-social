@@ -1,7 +1,7 @@
 import { sliceDate } from "../utils/sliceDate";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import * as api from "../utils/api";
 import Loading from "./loading";
 import VotesBtn from "./votesbtn";
 import ShowHideComments from "./showhidecomments";
@@ -14,9 +14,12 @@ export default function SingleReview() {
   const [isLoading, setIsLoading] = useState(true);
   const [votes, setVotes] = useState(0);
   const [commentCount, setCommentCount] = useState(0);
+  const [error, setError] = useState(null);
   useEffect(() => {
-    axios
-      .get(`https://nc-games-social.herokuapp.com/api/reviews/${reviewId}`)
+    setError(null);
+    setIsLoading(true);
+    api
+      .getData(`reviews/${reviewId}`)
       .then((response) => {
         const review = response.data.review;
         setSingleReview(review);
@@ -26,16 +29,19 @@ export default function SingleReview() {
         return review;
       })
       .then((review) => {
-        axios
-          .get(
-            `https://nc-games-social.herokuapp.com/api/users/${review.owner}`
-          )
-          .then((response) => {
-            setUsers(response.data.user);
-          });
+        return api.getData(`users/${review.owner}`);
+      })
+      .then((response) => {
+        setUsers(response.data.user);
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        setError(err);
       });
   }, [reviewId]);
-
+  if (error) {
+    return <h3 className="error">Sorry could not load review</h3>;
+  }
   return isLoading ? (
     <Loading />
   ) : (

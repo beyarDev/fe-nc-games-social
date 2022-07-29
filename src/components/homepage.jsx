@@ -12,17 +12,25 @@ export default function HomePage() {
   const [searchParams] = useSearchParams();
   const [reviewList, setReviewList] = useState([]);
   const [isloading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   const queryObject = {
     sort_by: searchParams.get("sortby"),
     order: searchParams.get("order"),
     limit: 100,
   };
   useEffect(() => {
+    setError(null);
     setIsLoading(true);
-    api.getData("reviews", queryObject).then((response) => {
-      setReviewList(response.data.reviews);
-      setIsLoading(false);
-    });
+    api
+      .getData("reviews", queryObject)
+      .then((response) => {
+        setReviewList(response.data.reviews);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        setError(err);
+      });
   }, [queryObject.order, queryObject.sort_by]);
 
   return isloading ? (
@@ -31,15 +39,19 @@ export default function HomePage() {
     <main>
       <FilterReviews />
       <section>
-        {reviewList.map((review) => {
-          return (
-            <ReviewCard
-              review={review}
-              key={review.review_id}
-              setReviewList={setReviewList}
-            />
-          );
-        })}
+        {error ? (
+          <h3 className="error">could not load data from the server, please try again later</h3>
+        ) : (
+          reviewList.map((review) => {
+            return (
+              <ReviewCard
+                review={review}
+                key={review.review_id}
+                setReviewList={setReviewList}
+              />
+            );
+          })
+        )}
       </section>
     </main>
   );

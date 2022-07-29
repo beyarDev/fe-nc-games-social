@@ -17,3 +17,7 @@
     border-radius: 50%;
 }
 
+.error{
+    width: fit-content;
+    margin: 0 auto;
+}
