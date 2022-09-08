@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import * as api from "../utils/api";
+import { Link } from "react-router-dom";
 //components
 import ReviewCard from "./reviewCard";
 import Loading from "./loading";
@@ -37,6 +38,7 @@ export default function HomePage() {
     <Loading />
   ) : (
     <main>
+      <Link to='/post-review' className="post-review-link">Post A Review</Link>
       <FilterReviews />
       <section>
         {error ? (

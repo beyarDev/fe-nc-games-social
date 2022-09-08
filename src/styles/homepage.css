@@ -1,3 +1,11 @@
+
+.post-review-link{
+    display: block;
+    text-decoration: none;
+    width: fit-content;
+    margin: 7px auto;
+    color:rgb(5, 104, 106);
+}
 .filters-container {
     width: 400px;
     display: flex;
