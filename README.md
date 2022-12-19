@@ -1,9 +1,9 @@
 ## NorthCoders Gaming Social Website
 
-website link [https://fe-nc-games-social.herokuapp.com/]:
+website link [https://fe-nc-games-social.vercel.app/]:
 
-It is a website to post reviews about games, users can interact with the reviews by UpvVting up or DownVoting the reviews
-They can comment on a review or delete a comment.
+It is a website to post reviews about games, users can interact with the reviews by voting up or down the reviews
+They can post a new reeview, comment on a review or delete a comment.
 The website is a single page appication built using React 18.2.0, React-router-dom v6
 
 ## Backend Link
