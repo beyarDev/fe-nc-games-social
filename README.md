@@ -9,7 +9,7 @@ The website is a single page appication built using React 18.2.0, React-router-d
 ## Backend Link
 
 Github repo : [https://github.com/beyarDev/nc-games-backend]
-Link to the deployed version : [https://nc-games-social.onrender.com/api]
+Link to the deployed version : [http://13.42.22.87/api/]
 
 ## Run The App Locally
 
