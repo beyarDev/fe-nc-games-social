@@ -8,6 +8,7 @@ export default function FilterReviews() {
       <select
         id="order"
         name="order"
+        value={searchParams.get("order")}
         onChange={(e) => {
           searchParams.set("order", e.target.value);
           setSearchParams(searchParams);
@@ -20,6 +21,7 @@ export default function FilterReviews() {
       <select
         id="sortby"
         name="sortby"
+        value={searchParams.get("sortby")}
         onChange={(e) => {
           searchParams.set("sortby", e.target.value);
           setSearchParams(searchParams);

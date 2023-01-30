@@ -7,16 +7,26 @@
     color:rgb(5, 104, 106);
 }
 .filters-container {
-    width: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 20px auto;
+    margin: 10px auto;
 }
 .filters-container label{
-    margin-right: 5px;
-    margin-left: 30px;
-}   
+    margin-right: 10px;
+    margin-left: 10px;
+    font-size: 1.5rem;
+    color: #bd5656;
+    font-weight: 500;
+}
+
+.filters-container select {
+    font-size: 1.5rem;
+    color:rgb(27, 27, 124);
+    border-radius: 5px;
+    border: 3px solid black;
+    text-align: center;
+}
 
 .review-card{
     display: flex;
@@ -67,4 +77,13 @@
 }
 .review-designer{
     margin-top: 10px;
+}
+
+@media only screen and (max-width:500px) {
+    .filters-container label{
+        font-size: 0.8rem;
+    }
+    .filters-container select {
+        font-size: 0.8rem;
+    }
 }
