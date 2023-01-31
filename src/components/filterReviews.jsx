@@ -4,7 +4,7 @@ export default function FilterReviews() {
   const [searchParams, setSearchParams] = useSearchParams();
   return (
     <div className="filters-container">
-      <label htmlFor="order">order</label>
+      <label htmlFor="order">Order</label>
       <select
         id="order"
         name="order"
@@ -17,7 +17,7 @@ export default function FilterReviews() {
         <option value="DESC">descending</option>
         <option value="ASC">ascending</option>
       </select>
-      <label htmlFor="sortby">SortBy</label>
+      <label htmlFor="sortby">Sort By</label>
       <select
         id="sortby"
         name="sortby"
