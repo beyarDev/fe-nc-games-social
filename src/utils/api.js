@@ -1,5 +1,5 @@
 import axios from "axios";
-const AppURL = "https://nc-games-social.onrender.com/api/";
+const AppURL = "http://localhost:9090/api/";
 export function getData(url, queryObject) {
   return axios.get(`${AppURL}${url}`, {
     params: queryObject,
