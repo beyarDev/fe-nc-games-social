@@ -1,5 +1,10 @@
 import axios from "axios";
-const AppURL = "http://localhost:9090/api/";
+
+let AppURL = "http://localhost:9090/api/";
+if (process.env.NODE_ENV === "production") {
+  AppURL = "http://api-container:9090/api/";
+}
+
 export function getData(url, queryObject) {
   return axios.get(`${AppURL}${url}`, {
     params: queryObject,
