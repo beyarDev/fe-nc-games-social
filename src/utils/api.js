@@ -2,7 +2,7 @@ import axios from "axios";
 
 let AppURL = "http://localhost:9090/api/";
 if (process.env.NODE_ENV === "production") {
-  AppURL = "https://api.beyaralhaji.com/api/";
+  AppURL = "https://api.beyaralhaji.com/";
 }
 
 export function getData(url, queryObject) {
